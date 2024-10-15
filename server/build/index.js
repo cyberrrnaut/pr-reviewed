@@ -22,7 +22,7 @@ const openai = new openai_1.default({
     apiKey: process.env.OPENAI_API_KEY,
 });
 const app = (0, express_1.default)();
-const PORT = 3000;
+const PORT = 5000;
 app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.get("/up", (req, res) => {
@@ -68,7 +68,7 @@ app.post('/create-webhook', (req, res) => __awaiter(void 0, void 0, void 0, func
             active: true,
             events: ['push', 'pull_request'],
             config: {
-                url: 'https://c3c3-2405-201-800e-e130-ab80-81a1-7c86-958e.ngrok-free.app/webhook',
+                url: 'https://workik-be/webhook',
                 content_type: 'json',
                 insecure_ssl: '0',
             },
@@ -79,6 +79,7 @@ app.post('/create-webhook', (req, res) => __awaiter(void 0, void 0, void 0, func
                 'Accept': 'application/vnd.github+json',
             },
         });
+        console.log(token);
         console.log('Webhook created successfully!');
         res.status(201).send('Webhook created successfully!');
     }
@@ -182,7 +183,7 @@ app.post('/webhook', (req, res) => __awaiter(void 0, void 0, void 0, function* (
 }));
 // Fetch changed files from the GitHub API
 const fetchChangedFiles = (owner, repoName, pullNumber) => __awaiter(void 0, void 0, void 0, function* () {
-    const token = process.env.GITHUB_TOKEN; // Access the GitHub token from environment variables
+    const token = process.env.GITHUB_ACCESS_TOKEN; // Access the GitHub token from environment variables
     try {
         const response = yield axios_1.default.get(`https://api.github.com/repos/${owner}/${repoName}/pulls/${pullNumber}/files`, {
             headers: {

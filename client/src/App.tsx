@@ -42,22 +42,33 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Auto GitHub PR Reviewer</h1>
+    <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+      <header className="p-5">
+        <h1 className="text-2xl font-bold">Auto GitHub PR Reviewer</h1>
         {token ? (
           <>
-            <p>Authenticated! Access Token: {token}</p>
+            <p className="mt-4">Authenticated! Access Token: {token}</p>
             <input
               type="text"
               value={repo}
               onChange={(e) => setRepo(e.target.value)}
               placeholder="Enter your repository (e.g., username/repo)"
+              className="mt-4 p-2 bg-gray-800 text-white border border-gray-700 rounded focus:outline-none focus:ring-2 focus:ring-green-500"
             />
-            <button onClick={createWebhook}>Create Webhook</button>
+            <button
+              onClick={createWebhook}
+              className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+            >
+              Create Webhook
+            </button>
           </>
         ) : (
-          <button onClick={handleConnectGitHub}>Connect GitHub</button>
+          <button 
+            onClick={handleConnectGitHub}
+            className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
+          >
+            Connect GitHub
+          </button>
         )}
       </header>
     </div>
@@ -65,4 +76,3 @@ function App() {
 }
 
 export default App;
-
