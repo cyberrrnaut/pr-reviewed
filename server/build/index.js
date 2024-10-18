@@ -21,6 +21,7 @@ dotenv_1.default.config();
 const openai = new openai_1.default({
     apiKey: process.env.OPENAI_API_KEY,
 });
+const redirect_uri = "https://workik-be.cyb3rnaut.com";
 const app = (0, express_1.default)();
 const PORT = 5000;
 app.use((0, cors_1.default)());
@@ -30,7 +31,7 @@ app.get("/up", (req, res) => {
 });
 // Step 1: Redirect to GitHub OAuth
 app.get('/auth/github', (req, res) => {
-    const redirectURI = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=repo&redirect_uri=${process.env.REDIRECT_URI}`;
+    const redirectURI = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&scope=repo&redirect_uri=${redirect_uri}`;
     res.redirect(redirectURI);
 });
 console.log(process.env.GITHUB_CLIENT_ID);
