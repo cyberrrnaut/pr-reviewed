@@ -6,7 +6,8 @@ function App() {
 
   // Handle GitHub authentication
   const handleConnectGitHub = () => {
-    window.location.href = 'http://localhost:3000/auth/github';
+    
+    window.location.href = 'http://workik-be.cyb3rnaut.com/auth/github';
   };
 
   // Handle OAuth callback
