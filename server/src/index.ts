@@ -56,7 +56,7 @@ app.get('/callback', async (req, res) => {
       const accessToken = response.data.access_token;
   
       // Redirect to frontend with the token as a query parameter
-      res.redirect(`http://localhost:5173?token=${accessToken}`);
+      res.redirect(`https://pr-reviewed-ipm3nflgz-soumyendu-das-projects.vercel.app/?token=${accessToken}`);
     } catch (err) {
       console.error('Error getting access token:', err);
       res.status(500).json({ error: 'OAuth failed' });
