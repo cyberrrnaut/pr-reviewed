@@ -11,7 +11,7 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const redirect_uri = "https://workik-be.cyb3rnaut.com"
+const redirect_uri = "https://workik-be.cyb3rnaut.com/callback"
 
 const app = express();
 const PORT = 5000;
