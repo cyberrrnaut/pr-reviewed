@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import  { useState, useEffect } from 'react';
 
 function App() {
   const [token, setToken] = useState('');
   const [repo, setRepo] = useState('');
-
+  const[webhookCreated,setWebhookCreated] = useState(false);
   // Handle GitHub authentication
   const handleConnectGitHub = () => {
     
-    window.location.href = 'http://workik-be.cyb3rnaut.com/auth/github';
+    window.location.href = 'https://workik-be.cyb3rnaut.com/auth/github';
   };
 
   // Handle OAuth callback
@@ -24,13 +24,14 @@ function App() {
     const storedToken = localStorage.getItem('github_token') || token;
     if (repo && storedToken) {
       try {
-        const response = await fetch('http://localhost:3000/create-webhook', {
+        const response = await fetch('https://workik-be.cyb3rnaut.com/create-webhook', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ token: storedToken, repo }),
         });
         const data = await response.text();
         console.log(data);
+        setWebhookCreated(true);
       } catch (error) {
         console.error('Error creating webhook:', error);
       }
@@ -44,11 +45,17 @@ function App() {
 
   return (
     <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
-      <header className="p-5">
-        <h1 className="text-2xl font-bold">Auto GitHub PR Reviewer</h1>
+      <header className="p-5  border flex flex-col items-center">
+        <h1 className="text-2xl font-bold">Auto-Git</h1>
         {token ? (
+          
           <>
-            <p className="mt-4">Authenticated! Access Token: {token}</p>
+          {webhookCreated?<>
+          <div className='p-5  border flex flex-col items-center"'>
+           Webhook deployed
+
+          </div>
+          </> :<><p className="mt-4 text-green-500">Yayy you're Authenticated! </p>
             <input
               type="text"
               value={repo}
@@ -61,13 +68,14 @@ function App() {
               className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
             >
               Create Webhook
-            </button>
+            </button></> }
+            
           </>
         ) : (
           <button 
             onClick={handleConnectGitHub}
             className="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600"
-          >
+          > 
             Connect GitHub
           </button>
         )}
