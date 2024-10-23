@@ -17,7 +17,7 @@ export default function Webhook() {
   const [token, setToken] = useState<string | null>(null);
 
   const storedToken = useGetToken();
-  const { username, error } = useGetUsername(); // Use the custom hook
+  const { username } = useGetUsername(); // Use the custom hook
 
   useEffect(() => {
     setToken(storedToken);
@@ -44,7 +44,6 @@ export default function Webhook() {
             Accept: 'application/vnd.github.v3+json',
           },
         });
-        
         const repoNames = response.data.map((repo: any) => repo.name);
         setRepos(repoNames);
       } catch (error) {
